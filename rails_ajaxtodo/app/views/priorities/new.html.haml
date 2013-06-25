@@ -1,0 +1,24 @@
+= form_for @priority do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.label :color
+  = f.text_field :color
+  = f.label :urgency_index
+  = f.number_field :urgency_index
+  = f.submit id: 'submit'
+
+%table 
+  %thead
+    %tr
+      %th Name  
+      %th Priority
+  %tbody#tasks_holder
+  - @priorities.each do |p|
+    %tr{:class => p.color}
+      %td
+        = p.name
+      %td 
+        = p.urgency_index
+
+= javascript_include_tag 'priorities'
+

@@ -1,0 +1,33 @@
+= form_for @task do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.label :desc
+  = f.text_field :desc
+  = f.label :duedate
+  = f.text_field :duedate
+  = label_tag "Priority (1-5)"
+  = number_field_tag 'task_priority_urgency_index'
+  = f.submit id: 'submit'
+
+%table 
+  %thead
+    %tr
+      %th Name  
+      %th Description
+      %th Due Date
+      %th Priority
+  %tbody#tasks_holder
+  - @tasks.each do |t|
+    %tr{:class => t.priority.color}
+      %td 
+        = t.name
+      %td 
+        = t.desc
+      %td 
+        = t.duedate
+      %td
+        -if t.priority.present?
+          = t.priority.urgency_index
+
+= javascript_include_tag 'tasks'
+
